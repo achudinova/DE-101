@@ -2,7 +2,7 @@
 Getting started with Data Engineering
 
 
-# Link to exercises 
+# Link to exercises
 > https://github.com/Data-Learn/data-engineering/tree/master/DE-101%20Modules
 
 # Link to the YouTube channel DataLearn
