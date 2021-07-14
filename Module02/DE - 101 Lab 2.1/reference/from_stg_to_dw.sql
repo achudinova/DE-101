@@ -51,7 +51,8 @@ customer_id   varchar(8) NOT NULL, --id can't be NULL
 truncate table dw.customer_dim;
 --inserting
 insert into dw.customer_dim 
-select 100+row_number() over(), customer_id, customer_name from (select distinct customer_id, customer_name from stg.orders ) a;
+select 100+row_number() over(), customer_id, customer_name
+from (select distinct customer_id, customer_name from stg.orders ) a;
 --checking
 select * from dw.customer_dim cd;  
 

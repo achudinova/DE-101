@@ -1,20 +1,24 @@
-# Задание для модуля 2
+# Module 2
 
-```
-Результаты домашней работы загружайте к себе в git репозиторий. Создайте папки
-DE-101/Module2/
-...
-И сохраняйте там результат.
-```
+## Inserting data into the database
 
-## Установка БД
+[create_and_fill_tables.sql](create_and_fill_tables.sql)
+   
+Here there are SQL queries to create the following objects in the database:
+- 2 schemas: stg, dwh 
+- stg.orders 
+- dwh.dim_calendar
+- dwh.dim_customer
+- dwh.dim_product
+- dwh.dim_geo
+- dwh.tfct_sales (transactional fact table)
 
-## Загрузка данных в БД
 
-## SQL запросы
+## Data model in SQLdbm
+![Data model](model.png)
 
-## Нарисовать модель данных в SQLdbm
+## Graphs using Google Sheets
 
-## Нарисовать графики в Google Sheets
+## Graphs using KlipFolio
 
-## Нарисовать графики в KlipFolio
+
