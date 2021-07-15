@@ -1,7 +1,6 @@
 -- Create new schemas
 
 create schema dwh;
-create schema stg;
 
 -- ****************************************************************************
 -- DWH.DIM_CALENDAR
@@ -153,7 +152,7 @@ CREATE TABLE dwh.dim_product
  product_id        varchar(50) NOT NULL,
  product_name      varchar(150) NOT NULL,
  category_name     varchar(15) NOT NULL,
- sub_category_name varchar(11) NOT NULL,
+ subcategory_name varchar(11) NOT NULL,
  CONSTRAINT PK_dim_product PRIMARY KEY ( product_key )
 );
 
@@ -171,7 +170,7 @@ from
 	product_id		product_id,
 	product_name	product_name,
 	category 		category_name,
-	subcategory 	sub_category_name
+	subcategory 	subcategory_name
 from stg.orders
 order by 1) t;
 
@@ -220,7 +219,7 @@ select * from dwh.dim_shipping;
 -- ****************************************************************************
 
 -- Drop
-DROP table if exists dwh.tfct_sales cascade;
+DROP table if exists dwh.tfct_sales;
 
 -- Create the table
 CREATE TABLE dwh.tfct_sales
@@ -237,17 +236,17 @@ CREATE TABLE dwh.tfct_sales
  quantity          integer NOT NULL,
  discount          numeric(4,2) NOT NULL,
  profit            numeric(28,4) NOT NULL,
- CONSTRAINT PK_order PRIMARY KEY ( sales_key ),
- CONSTRAINT FK_28 FOREIGN KEY ( customer_key ) REFERENCES dwh.dim_customer ( customer_key ),
- CONSTRAINT FK_31 FOREIGN KEY ( product_key ) REFERENCES dwh.dim_product ( product_key ),
- CONSTRAINT FK_60 FOREIGN KEY ( shipping_key ) REFERENCES dwh.tfct_sales ( shipping_key ),
- CONSTRAINT FK_68 FOREIGN KEY ( geo_key ) REFERENCES dwh.dim_geo ( geo_key )
+ CONSTRAINT PK_order PRIMARY KEY ( sales_key )
+ --,CONSTRAINT FK_28 FOREIGN KEY ( customer_key ) REFERENCES dwh.dim_customer ( customer_key )
+ --,CONSTRAINT FK_31 FOREIGN KEY ( product_key ) REFERENCES dwh.dim_product ( product_key )
+ --,CONSTRAINT FK_60 FOREIGN KEY ( shipping_key ) REFERENCES dwh.tfct_sales ( shipping_key )
+ --,CONSTRAINT FK_68 FOREIGN KEY ( geo_key ) REFERENCES dwh.dim_geo ( geo_key )
 );
 
-CREATE INDEX fkIdx_29 ON dwh.tfct_sales (customer_key);
-CREATE INDEX fkIdx_32 ON dwh.tfct_sales (product_key) ;
-CREATE INDEX fkIdx_61 ON dwh.tfct_sales (shipping_key);
-CREATE INDEX fkIdx_69 ON dwh.tfct_sales (geo_key);
+--CREATE INDEX fkIdx_29 ON dwh.tfct_sales (customer_key);
+--CREATE INDEX fkIdx_32 ON dwh.tfct_sales (product_key) ;
+--CREATE INDEX fkIdx_61 ON dwh.tfct_sales (shipping_key);
+--CREATE INDEX fkIdx_69 ON dwh.tfct_sales (geo_key);
 
 
 -- Clear the table
@@ -270,7 +269,7 @@ select
 	profit
 from stg.orders stg
 	join dwh.dim_customer c on c.customer_id = stg.customer_id
-	join dwh.dim_product p on p.product_id = stg.product_id and p.product_name = stg.product_name and  p.category_name = stg.category and p.sub_category_name = stg.subcategory
+	join dwh.dim_product p on p.product_id = stg.product_id and p.product_name = stg.product_name and  p.category_name = stg.category and p.subcategory_name = stg.subcategory
 	join dwh.dim_shipping s on s.shipping_mode = stg.ship_mode
 	join dwh.dim_geo g on g.city = stg.city and g.country = stg.country and g.postal_code = stg.postal_code::varchar and g.state = stg.state and g.region = stg.region ;
 
