@@ -584,13 +584,13 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Add geo_key</from>
-      <to>dim_geo</to>
+      <from>stg.orders</from>
+      <to>Select geo</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>stg.orders</from>
-      <to>Select geo</to>
+      <from>Add geo_key</from>
+      <to>dim_geo</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -663,11 +663,11 @@
         <case_insensitive>N</case_insensitive>
       </field>
       <field>
-        <name>category</name>
+        <name>category_name</name>
         <case_insensitive>N</case_insensitive>
       </field>
       <field>
-        <name>subcategory</name>
+        <name>subcategory_name</name>
         <case_insensitive>N</case_insensitive>
       </field>
     </fields>
@@ -1387,7 +1387,7 @@ from
         <case_insensitive>N</case_insensitive>
       </field>
       <field>
-        <name>segment</name>
+        <name>segment_name</name>
         <case_insensitive>N</case_insensitive>
       </field>
     </fields>
@@ -1839,7 +1839,8 @@ from
     <single_statement>N</single_statement>
     <replace_variables>N</replace_variables>
     <quoteString>N</quoteString>
-    <sql>-- Generate dates
+    <sql>truncate table dwh.dim_calendar;
+-- Generate dates
 insert into dwh.dim_calendar
 select
 	to_char(date, 'yyyymmdd')::int 	as date_key,
@@ -1929,6 +1930,10 @@ where city = 'Burlington' and postal_code is null;</sql>
     </partitioning>
     <fields>
       <field>
+        <name>country</name>
+        <rename/>
+      </field>
+      <field>
         <name>city</name>
         <rename/>
       </field>
@@ -1979,6 +1984,14 @@ where city = 'Burlington' and postal_code is null;</sql>
     <compress_variable/>
     <unique_rows>N</unique_rows>
     <fields>
+      <field>
+        <name>country</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
       <field>
         <name>city</name>
         <ascending>Y</ascending>
@@ -2042,6 +2055,10 @@ where city = 'Burlington' and postal_code is null;</sql>
     <reject_duplicate_row>N</reject_duplicate_row>
     <error_description/>
     <fields>
+      <field>
+        <name>country</name>
+        <case_insensitive>N</case_insensitive>
+      </field>
       <field>
         <name>city</name>
         <case_insensitive>N</case_insensitive>
@@ -2126,7 +2143,7 @@ where city = 'Burlington' and postal_code is null;</sql>
     <truncate>Y</truncate>
     <ignore_errors>N</ignore_errors>
     <use_batch>Y</use_batch>
-    <specify_fields>N</specify_fields>
+    <specify_fields>Y</specify_fields>
     <partitioning_enabled>N</partitioning_enabled>
     <partitioning_field/>
     <partitioning_daily>N</partitioning_daily>
@@ -2138,12 +2155,28 @@ where city = 'Burlington' and postal_code is null;</sql>
     <return_field/>
     <fields>
       <field>
-        <column_name>shipping_mode</column_name>
-        <stream_name>shipping_mode</stream_name>
+        <column_name>country</column_name>
+        <stream_name>country</stream_name>
       </field>
       <field>
-        <column_name>shipping_key</column_name>
-        <stream_name>shipping_key</stream_name>
+        <column_name>city</column_name>
+        <stream_name>city</stream_name>
+      </field>
+      <field>
+        <column_name>state</column_name>
+        <stream_name>state</stream_name>
+      </field>
+      <field>
+        <column_name>postal_code</column_name>
+        <stream_name>postal_code</stream_name>
+      </field>
+      <field>
+        <column_name>region</column_name>
+        <stream_name>region</stream_name>
+      </field>
+      <field>
+        <column_name>geo_key</column_name>
+        <stream_name>geo_key</stream_name>
       </field>
     </fields>
     <attributes/>

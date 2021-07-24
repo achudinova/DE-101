@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>staging orders</name>
+    <name>stg_tables</name>
     <description/>
     <extended_description/>
     <trans_version/>
     <trans_type>Normal</trans_type>
+    <trans_status>0</trans_status>
     <directory>/</directory>
     <parameters>
     </parameters>
@@ -530,7 +531,7 @@
     <accept_field/>
     <accept_stepname/>
     <file>
-      <name>${SRC_FOLDER}/Sample - Superstore.xls</name>
+      <name>${SRC_FOLDER}/Sample-Superstore.xls</name>
       <filemask/>
       <exclude_filemask/>
       <file_required>N</file_required>
@@ -857,7 +858,7 @@
     <accept_field/>
     <accept_stepname/>
     <file>
-      <name>${SRC_FOLDER}/Sample - Superstore.xls</name>
+      <name>${SRC_FOLDER}/Sample-Superstore.xls</name>
       <filemask/>
       <exclude_filemask/>
       <file_required>N</file_required>
@@ -956,7 +957,12 @@
     <accept_field/>
     <accept_stepname/>
     <file>
-      <name>${SRC_FOLDER}/Sample - Superstore.xls</name>
+      <name>${SRC_FOLDER}/Sample-Superstore.xls</name>
+      <filemask/>
+      <exclude_filemask/>
+      <file_required>N</file_required>
+      <include_subfolders>N</include_subfolders>
+      <name/>
       <filemask/>
       <exclude_filemask/>
       <file_required>N</file_required>
