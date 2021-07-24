@@ -509,43 +509,13 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Sort products</from>
-      <to>Unique products</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>Select customers</from>
       <to>Sort customers</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Sort customers</from>
-      <to>Unique customers</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>Select shipping</from>
       <to>Sort shipping</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Sort shipping</from>
-      <to>Unique shipping</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Unique products</from>
-      <to>Add product_key</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Unique customers</from>
-      <to>Add customer_key</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Unique shipping</from>
-      <to>Add shipping_key</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -574,16 +544,6 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Sort geo</from>
-      <to>Unique geo</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Unique geo</from>
-      <to>Add geo_key</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>stg.orders</from>
       <to>Select geo</to>
       <enabled>Y</enabled>
@@ -591,6 +551,26 @@
     <hop>
       <from>Add geo_key</from>
       <to>dim_geo</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Sort products</from>
+      <to>Add product_key</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Sort customers</from>
+      <to>Add customer_key</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Sort shipping</from>
+      <to>Add shipping_key</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Sort geo</from>
+      <to>Add geo_key</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -634,53 +614,6 @@
     </remotesteps>
     <GUI>
       <xloc>448</xloc>
-      <yloc>128</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Unique products</name>
-    <type>Unique</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <count_rows>N</count_rows>
-    <count_field/>
-    <reject_duplicate_row>N</reject_duplicate_row>
-    <error_description/>
-    <fields>
-      <field>
-        <name>product_id</name>
-        <case_insensitive>N</case_insensitive>
-      </field>
-      <field>
-        <name>product_name</name>
-        <case_insensitive>N</case_insensitive>
-      </field>
-      <field>
-        <name>category_name</name>
-        <case_insensitive>N</case_insensitive>
-      </field>
-      <field>
-        <name>subcategory_name</name>
-        <case_insensitive>N</case_insensitive>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>704</xloc>
       <yloc>128</yloc>
       <draw>Y</draw>
     </GUI>
@@ -744,7 +677,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1008</xloc>
+      <xloc>880</xloc>
       <yloc>128</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1363,49 +1296,6 @@ from
     </GUI>
   </step>
   <step>
-    <name>Unique customers</name>
-    <type>Unique</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <count_rows>N</count_rows>
-    <count_field/>
-    <reject_duplicate_row>N</reject_duplicate_row>
-    <error_description/>
-    <fields>
-      <field>
-        <name>customer_id</name>
-        <case_insensitive>N</case_insensitive>
-      </field>
-      <field>
-        <name>customer_name</name>
-        <case_insensitive>N</case_insensitive>
-      </field>
-      <field>
-        <name>segment_name</name>
-        <case_insensitive>N</case_insensitive>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>704</xloc>
-      <yloc>224</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
     <name>Sort products</name>
     <type>SortRows</type>
     <description/>
@@ -1422,7 +1312,7 @@ from
     <free_memory/>
     <compress>N</compress>
     <compress_variable/>
-    <unique_rows>N</unique_rows>
+    <unique_rows>Y</unique_rows>
     <fields>
       <field>
         <name>product_id</name>
@@ -1488,7 +1378,7 @@ from
     <free_memory/>
     <compress>N</compress>
     <compress_variable/>
-    <unique_rows>N</unique_rows>
+    <unique_rows>Y</unique_rows>
     <fields>
       <field>
         <name>customer_id</name>
@@ -1546,7 +1436,7 @@ from
     <free_memory/>
     <compress>N</compress>
     <compress_variable/>
-    <unique_rows>N</unique_rows>
+    <unique_rows>Y</unique_rows>
     <fields>
       <field>
         <name>shipping_mode</name>
@@ -1567,41 +1457,6 @@ from
     </remotesteps>
     <GUI>
       <xloc>576</xloc>
-      <yloc>320</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Unique shipping</name>
-    <type>Unique</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <count_rows>N</count_rows>
-    <count_field/>
-    <reject_duplicate_row>N</reject_duplicate_row>
-    <error_description/>
-    <fields>
-      <field>
-        <name>shipping_mode</name>
-        <case_insensitive>N</case_insensitive>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>704</xloc>
       <yloc>320</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1636,7 +1491,7 @@ from
       </output>
     </remotesteps>
     <GUI>
-      <xloc>848</xloc>
+      <xloc>720</xloc>
       <yloc>128</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1671,7 +1526,7 @@ from
       </output>
     </remotesteps>
     <GUI>
-      <xloc>848</xloc>
+      <xloc>720</xloc>
       <yloc>224</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1706,7 +1561,7 @@ from
       </output>
     </remotesteps>
     <GUI>
-      <xloc>848</xloc>
+      <xloc>720</xloc>
       <yloc>320</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1766,7 +1621,7 @@ from
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1008</xloc>
+      <xloc>880</xloc>
       <yloc>224</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1818,7 +1673,7 @@ from
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1008</xloc>
+      <xloc>880</xloc>
       <yloc>320</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1982,7 +1837,7 @@ where city = 'Burlington' and postal_code is null;</sql>
     <free_memory/>
     <compress>N</compress>
     <compress_variable/>
-    <unique_rows>N</unique_rows>
+    <unique_rows>Y</unique_rows>
     <fields>
       <field>
         <name>country</name>
@@ -2040,57 +1895,6 @@ where city = 'Burlington' and postal_code is null;</sql>
     </GUI>
   </step>
   <step>
-    <name>Unique geo</name>
-    <type>Unique</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <count_rows>N</count_rows>
-    <count_field/>
-    <reject_duplicate_row>N</reject_duplicate_row>
-    <error_description/>
-    <fields>
-      <field>
-        <name>country</name>
-        <case_insensitive>N</case_insensitive>
-      </field>
-      <field>
-        <name>city</name>
-        <case_insensitive>N</case_insensitive>
-      </field>
-      <field>
-        <name>state</name>
-        <case_insensitive>N</case_insensitive>
-      </field>
-      <field>
-        <name>postal_code</name>
-        <case_insensitive>N</case_insensitive>
-      </field>
-      <field>
-        <name>region</name>
-        <case_insensitive>N</case_insensitive>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>704</xloc>
-      <yloc>416</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
     <name>Add geo_key</name>
     <type>Sequence</type>
     <description/>
@@ -2120,7 +1924,7 @@ where city = 'Burlington' and postal_code is null;</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>848</xloc>
+      <xloc>720</xloc>
       <yloc>416</yloc>
       <draw>Y</draw>
     </GUI>
@@ -2188,7 +1992,7 @@ where city = 'Burlington' and postal_code is null;</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1008</xloc>
+      <xloc>880</xloc>
       <yloc>416</yloc>
       <draw>Y</draw>
     </GUI>
