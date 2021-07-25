@@ -1,20 +1,18 @@
 # DE-101
-Getting started with Data Engineering
+This repository is dedicated to the course **Getting started with Data Engineering** by Dmitry Anoshin.
 
-
-# Link to exercises
+## Link to the YouTube channel DataLearn
+> https://www.youtube.com/channel/UCWki7GBUE5lDMJCbn4e1XMg/featured
+## Link to exercises
 > https://github.com/Data-Learn/data-engineering/tree/master/DE-101%20Modules
 
-# Link to the YouTube channel DataLearn
-> https://www.youtube.com/channel/UCWki7GBUE5lDMJCbn4e1XMg/featured
-
-# Tech stack
+## Tech stack
 **Data modeling**
 - [sqlDBM](https://app.sqldbm.com/PostgreSQL/Draft/#)
 
 **Database**
 - PostgreSQL
-  
+
 **Data analysis**
 - Jupyter Notebook
 
@@ -28,7 +26,7 @@ Getting started with Data Engineering
 - Google Data Studio
 
 
-# Lab Progress
+## Lab Progress
 - Module 1. 
     - [x] Lab 1.1
 - Module 2.
@@ -43,7 +41,7 @@ Getting started with Data Engineering
     - [ ] AWS - Lambda Function Using the AWS Console
     - [ ] AWS - Python Workshop
     - [ ] AWS - Static web-site using S3
-    - [ ]Azure - Create and Manage Azure Blob Storage
+    - [ ] Azure - Create and Manage Azure Blob Storage
     - [ ] Azure - Introduction to Azure Active Directory
 - Module 6
     - [ ] Lab 6.3
