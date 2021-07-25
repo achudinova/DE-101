@@ -1,49 +1,40 @@
-# Задания по работе с Apache Spark
+# Apache Spark Exercises
+
+[Download](https://www.kaggle.com/usdot/flight-delays) the dataset *2015 Flight Delays and Cancellations*
+
+**Context**
+
+The U.S. Department of Transportation's (DOT) Bureau of Transportation Statistics tracks the on-time performance of domestic flights operated by large air carriers. Summary information on the number of on-time, delayed, canceled, and diverted flights is published in DOT's monthly Air Travel Consumer Report and in this dataset of 2015 flight delays and cancellations.
+
+**Acknowledgements**
+
+The flight delay and cancellation data was collected and published by the DOT's Bureau of Transportation Statistics.
 
 ```
-Результаты домашней работы загружайте к себе в git репозиторий. Создайте папки
-DE-101/Module7/
-...
-И сохраняйте там результат.
-```
-
-Для выполнения заданий вам необходимо скачать данные о полётах авиакомпаний США за 2015 год с сайта Kaggle:
-https://www.kaggle.com/usdot/flight-delays
-
-В этих трёх файлах содержатся сведения об отменах и задержках рейсов. 
-
-```
-Формат сдачи заданий: 
-Для каждой задачи загрузите один .py-скрипт с кодом + 1 скриншот с результатом выполнения кода (чтобы была видна итоговая таблица с данными).
-Так мы сможем и посмотреть на результат, и сделать небольшое код-ревью
+Submit the following: 
+For each task upload one .py-script with the code + one screenshot with the code results  (in order to see the final table with all data).
+Purpose: evalute the result and do some code review.
 ```
 
 ```
-Примечание: постарайтесь использовать при решении именно функции PySpark, а не чистый SQL.
-Так вы получите больше навыков в программировании.
-Но если вдруг у вас не получается даже после долгих попыток - ничего страшного, используйте temp view и SQL.
-Главное - результат :)
+Note: try to use PySpark functions (not only SQL).
 ```
 
-## Задача №1
+## Task #1
 
-Найдите топ-5 аэропортов США по количеству задержанных прибытий рейсов в них.
+Find top-5 US airports by the number of delayed frights.
 
-(Речь идёт об аэропортах как точках прибытия, а не отправления! То есть **куда** задерживались рейсы, а не **откуда**)
+Final DataFrame must contain 2 columns: airport name; number of delayed flights.
 
-Итоговый DataFrame должен содержать 2 колонки - название аэропорта, число задержанных рейсов, которые летели в этот аэропорт.
+## Task #2
 
-## Задача №2
+Name top-3 avia companies by number of canlcelled flights (in decreasing order)
+Final DataFrame must contain 2 columns: company name; number of cancelled flights.
 
-Назовите топ-3 авиакомпании по числу отмененных рейсов (в порядке убывания).
+## Task #3
+Name top-5 USA states by the most high average flight time for passengers **departing** from these states.
 
-Итоговый DataFrame должен содержать 2 колонки - название авиакомпании, число отмененных рейсов.
+E.g. the passengers departing from Texas (doesn't matter where they fly) spend 4.3 hours flying in average.<br>
+The passengers departing from Alaska - spent 7.5 flying in average etc.
 
-## Задача №3
-Назовите топ-5 штатов США по самому высокому среднему времени, которое проводят в полете **улетающие** из этих штатов пассажиры.
-
-Например, пассажиры, вылетающие из штата Техас (неважно куда они при этом летят), в среднем проводят в полете 4,3 часов. 
-Пассажиры, вылетающие из Аляски - в среднем проводят в полете 7.5 часов, и т.д.
-Нужно найти 5 самых "долголетающих" штатов США.
-
-Итоговый DataFrame должен содержать 2 колонки - название штата, среднее число часов в пути для рейсов, улетающих из этого штата.
+Final DataFrame must contain 2 columns - state name; average number of hours flying for those departing from the state.
