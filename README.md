@@ -38,7 +38,7 @@ https://app.sqldbm.com/PostgreSQL/Draft/#
     - [ ] Lab 3.1
 - Module 4. 
     - [x] Lab 4.4
-    - [ ] Lab 4.5
+    - [ ] Lab 4.5 :hourglass:
 - Module 5
     - [ ] EC2-in-VPC
     - [ ] AWS - Lambda Function Using the AWS Console
