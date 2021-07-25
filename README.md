@@ -10,8 +10,7 @@ Getting started with Data Engineering
 
 # Tech stack
 **Data modeling**
-- sqlDBM<br>
-https://app.sqldbm.com/PostgreSQL/Draft/#
+- [sqlDBM](https://app.sqldbm.com/PostgreSQL/Draft/#)
 
 **Database**
 - PostgreSQL
