@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>db_preparation</name>
+    <name>Time for action  generating a range of dates and inspecting the data as it is being created</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -428,115 +428,208 @@
     <clusterschemas>
     </clusterschemas>
     <created_user>-</created_user>
-    <created_date>2021/07/24 13:30:05.580</created_date>
+    <created_date>2021/07/25 12:51:35.910</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2021/07/24 13:30:05.580</modified_date>
+    <modified_date>2021/07/25 12:51:35.910</modified_date>
     <key_for_session_key/>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
   </notepads>
-  <connection>
-    <name>datalearn_db</name>
-    <server>ls-a2eceed380d1b34866b8ab4399a2540dc7efea4f.cuahlnidktx2.eu-central-1.rds.amazonaws.com</server>
-    <type>POSTGRESQL</type>
-    <access>Native</access>
-    <database>postgres</database>
-    <port>5432</port>
-    <username>dbmasteruser</username>
-    <password>Encrypted 622b715f6972702d723d76787c246c66d2b5e69332db95cc984d876ef1a2a9dc</password>
-    <servername/>
-    <data_tablespace/>
-    <index_tablespace/>
-    <attributes>
-      <attribute>
-        <code>FORCE_IDENTIFIERS_TO_LOWERCASE</code>
-        <attribute>N</attribute>
-      </attribute>
-      <attribute>
-        <code>FORCE_IDENTIFIERS_TO_UPPERCASE</code>
-        <attribute>N</attribute>
-      </attribute>
-      <attribute>
-        <code>IS_CLUSTERED</code>
-        <attribute>N</attribute>
-      </attribute>
-      <attribute>
-        <code>PORT_NUMBER</code>
-        <attribute>5432</attribute>
-      </attribute>
-      <attribute>
-        <code>PRESERVE_RESERVED_WORD_CASE</code>
-        <attribute>Y</attribute>
-      </attribute>
-      <attribute>
-        <code>QUOTE_ALL_FIELDS</code>
-        <attribute>N</attribute>
-      </attribute>
-      <attribute>
-        <code>SUPPORTS_BOOLEAN_DATA_TYPE</code>
-        <attribute>Y</attribute>
-      </attribute>
-      <attribute>
-        <code>SUPPORTS_TIMESTAMP_DATA_TYPE</code>
-        <attribute>Y</attribute>
-      </attribute>
-      <attribute>
-        <code>USE_POOLING</code>
-        <attribute>N</attribute>
-      </attribute>
-    </attributes>
-  </connection>
   <order>
     <hop>
-      <from>Create schemas</from>
-      <to>Create stg.orders</to>
+      <from>Generate rows</from>
+      <to>Calculator</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Create stg.orders</from>
-      <to>Create stg.people</to>
+      <from>Calculator</from>
+      <to>Clone row</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Create stg.people</from>
-      <to>Create stg.returns</to>
+      <from>Calculator 2</from>
+      <to>Select values</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Create schemas</from>
-      <to>Create dwh.dim_calendar</to>
+      <from>Select values</from>
+      <to>Select values 2</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Create dwh.dim_calendar</from>
-      <to>Create dwh.dim_customer</to>
+      <from>Clone row</from>
+      <to>Delay row</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Create dwh.dim_customer</from>
-      <to>Create dwh.dim_shipping</to>
+      <from>Delay row</from>
+      <to>Calculator 2</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Create dwh.dim_shipping</from>
-      <to>Create dwh.tfct_sales</to>
+      <from>Generate rows 2</from>
+      <to>Calculator 3</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Create dwh.tfct_sales</from>
-      <to>Create dwh.dim_product</to>
+      <from>Calculator 3</from>
+      <to>Clone row 2</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Create dwh.dim_product</from>
-      <to>Create dwh.dim_geo</to>
+      <from>Clone row 2</from>
+      <to>Calculator 2 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Calculator 2 2</from>
+      <to>Filter rows</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Filter rows</from>
+      <to>Select values 3</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Select values 3</from>
+      <to>User defined Java expression</to>
       <enabled>Y</enabled>
     </hop>
   </order>
   <step>
-    <name>Create schemas</name>
-    <type>ExecSQL</type>
+    <name>Generate rows</name>
+    <type>RowGenerator</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>start_date</name>
+        <type>Date</type>
+        <format>yyyy-MM-dd</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>2013-01-01</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>end_date</name>
+        <type>Date</type>
+        <format>yyyy-MM-dd</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>2023-12-31</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+    <limit>1</limit>
+    <never_ending>N</never_ending>
+    <interval_in_ms>5000</interval_in_ms>
+    <row_time_field>now</row_time_field>
+    <last_time_field>FiveSecondsAgo</last_time_field>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>64</xloc>
+      <yloc>288</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Calculator</name>
+    <type>Calculator</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <failIfNoFile>Y</failIfNoFile>
+    <calculation>
+      <field_name>diff_dates</field_name>
+      <calc_type>DATE_DIFF</calc_type>
+      <field_a>end_date</field_a>
+      <field_b>start_date</field_b>
+      <field_c/>
+      <value_type>Integer</value_type>
+      <value_length>-1</value_length>
+      <value_precision>-1</value_precision>
+      <remove>N</remove>
+      <conversion_mask/>
+      <decimal_symbol/>
+      <grouping_symbol/>
+      <currency_symbol/>
+    </calculation>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>192</xloc>
+      <yloc>288</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Clone row</name>
+    <type>CloneRow</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <nrclones>0</nrclones>
+    <addcloneflag>N</addcloneflag>
+    <cloneflagfield/>
+    <nrcloneinfield>Y</nrcloneinfield>
+    <nrclonefield>diff_dates</nrclonefield>
+    <addclonenum>Y</addclonenum>
+    <clonenumfield>delta</clonenumfield>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>320</xloc>
+      <yloc>288</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Calculator 2</name>
+    <type>Calculator</type>
     <description/>
     <distribute>N</distribute>
     <custom_distribution/>
@@ -545,20 +638,22 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>datalearn_db</connection>
-    <execute_each_row>N</execute_each_row>
-    <single_statement>N</single_statement>
-    <replace_variables>N</replace_variables>
-    <quoteString>N</quoteString>
-    <sql>create schema if not exists stg;
-create schema if not exists dwh;</sql>
-    <set_params>N</set_params>
-    <insert_field/>
-    <update_field/>
-    <delete_field/>
-    <read_field/>
-    <arguments>
-    </arguments>
+    <failIfNoFile>Y</failIfNoFile>
+    <calculation>
+      <field_name>a_single_date</field_name>
+      <calc_type>ADD_DAYS</calc_type>
+      <field_a>start_date</field_a>
+      <field_b>delta</field_b>
+      <field_c/>
+      <value_type>Date</value_type>
+      <value_length>-1</value_length>
+      <value_precision>-1</value_precision>
+      <remove>N</remove>
+      <conversion_mask/>
+      <decimal_symbol/>
+      <grouping_symbol/>
+      <currency_symbol/>
+    </calculation>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
@@ -568,14 +663,14 @@ create schema if not exists dwh;</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>112</xloc>
-      <yloc>160</yloc>
+      <xloc>528</xloc>
+      <yloc>288</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Create stg.orders</name>
-    <type>ExecSQL</type>
+    <name>Select values</name>
+    <type>SelectValues</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -584,44 +679,26 @@ create schema if not exists dwh;</sql>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>datalearn_db</connection>
-    <execute_each_row>N</execute_each_row>
-    <single_statement>N</single_statement>
-    <replace_variables>N</replace_variables>
-    <quoteString>N</quoteString>
-    <sql>DROP TABLE IF EXISTS stg.orders;
-
-CREATE TABLE stg.orders (
-	row_id int4 NOT NULL,
-	order_id varchar(14) NOT NULL,
-	order_date date NOT NULL,
-	ship_date date NOT NULL,
-	ship_mode varchar(14) NOT NULL,
-	customer_id varchar(8) NOT NULL,
-	customer_name varchar(22) NOT NULL,
-	segment varchar(11) NOT NULL,
-	country varchar(13) NOT NULL,
-	city varchar(17) NOT NULL,
-	state varchar(20) NOT NULL,
-	postal_code varchar(50) NULL,
-	region varchar(7) NOT NULL,
-	product_id varchar(15) NOT NULL,
-	category varchar(15) NOT NULL,
-	subcategory varchar(11) NOT NULL,
-	product_name varchar(127) NOT NULL,
-	sales numeric(9,4) NOT NULL,
-	quantity int4 NOT NULL,
-	discount numeric(4,2) NOT NULL,
-	profit numeric(21,16) NOT NULL,
-	CONSTRAINT orders_pkey PRIMARY KEY (row_id)
-);</sql>
-    <set_params>N</set_params>
-    <insert_field/>
-    <update_field/>
-    <delete_field/>
-    <read_field/>
-    <arguments>
-    </arguments>
+    <fields>
+      <select_unspecified>N</select_unspecified>
+      <meta>
+        <name>a_single_date</name>
+        <rename>a_single_date</rename>
+        <type>String</type>
+        <length>-2</length>
+        <precision>-2</precision>
+        <conversion_mask>MM/dd/yy</conversion_mask>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
+    </fields>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
@@ -631,14 +708,14 @@ CREATE TABLE stg.orders (
       </output>
     </remotesteps>
     <GUI>
-      <xloc>272</xloc>
-      <yloc>160</yloc>
+      <xloc>672</xloc>
+      <yloc>288</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Create stg.people</name>
-    <type>ExecSQL</type>
+    <name>Select values 2</name>
+    <type>SelectValues</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -647,25 +724,13 @@ CREATE TABLE stg.orders (
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>datalearn_db</connection>
-    <execute_each_row>N</execute_each_row>
-    <single_statement>N</single_statement>
-    <replace_variables>N</replace_variables>
-    <quoteString>N</quoteString>
-    <sql>DROP TABLE IF EXISTS stg.people;
-
-CREATE TABLE stg.people (
-	person varchar(17) NOT NULL,
-	region varchar(7) NOT NULL,
-	CONSTRAINT people_pkey PRIMARY KEY (person)
-);</sql>
-    <set_params>N</set_params>
-    <insert_field/>
-    <update_field/>
-    <delete_field/>
-    <read_field/>
-    <arguments>
-    </arguments>
+    <fields>
+      <field>
+        <name>a_single_date</name>
+        <rename/>
+      </field>
+      <select_unspecified>N</select_unspecified>
+    </fields>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
@@ -675,14 +740,14 @@ CREATE TABLE stg.people (
       </output>
     </remotesteps>
     <GUI>
-      <xloc>448</xloc>
-      <yloc>160</yloc>
+      <xloc>768</xloc>
+      <yloc>288</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Create stg.returns</name>
-    <type>ExecSQL</type>
+    <name>Delay row</name>
+    <type>Delay</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -691,24 +756,8 @@ CREATE TABLE stg.people (
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>datalearn_db</connection>
-    <execute_each_row>N</execute_each_row>
-    <single_statement>N</single_statement>
-    <replace_variables>N</replace_variables>
-    <quoteString>N</quoteString>
-    <sql>DROP TABLE IF EXISTS stg.returns;
-
-CREATE TABLE stg.returns(
-   Returned   VARCHAR(5) NOT NULL
-  ,Order_ID   VARCHAR(14) NOT NULL
-);</sql>
-    <set_params>N</set_params>
-    <insert_field/>
-    <update_field/>
-    <delete_field/>
-    <read_field/>
-    <arguments>
-    </arguments>
+    <timeout>500</timeout>
+    <scaletime>milliseconds</scaletime>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
@@ -718,14 +767,14 @@ CREATE TABLE stg.returns(
       </output>
     </remotesteps>
     <GUI>
-      <xloc>624</xloc>
-      <yloc>160</yloc>
+      <xloc>432</xloc>
+      <yloc>288</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Create dwh.dim_calendar</name>
-    <type>ExecSQL</type>
+    <name>Generate rows 2</name>
+    <type>RowGenerator</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -734,35 +783,37 @@ CREATE TABLE stg.returns(
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>datalearn_db</connection>
-    <execute_each_row>N</execute_each_row>
-    <single_statement>N</single_statement>
-    <replace_variables>N</replace_variables>
-    <quoteString>N</quoteString>
-    <sql>-- Drop the table
-DROP table if exists dwh.dim_calendar cascade;
-
--- Create the table
-CREATE TABLE dwh.dim_calendar
-(
- date_key serial NOT NULL,
- "date"     date NOT NULL,
- day      integer NOT NULL,
- week     integer NOT NULL,
- month    integer NOT NULL,
- year     integer NOT NULL,
- quarter  integer NOT NULL,
- week_day varchar(20) NOT NULL,
- leap     varchar(20) NOT NULL,
- CONSTRAINT PK_dim_calendar PRIMARY KEY ( date_key )
-);</sql>
-    <set_params>N</set_params>
-    <insert_field/>
-    <update_field/>
-    <delete_field/>
-    <read_field/>
-    <arguments>
-    </arguments>
+    <fields>
+      <field>
+        <name>start_date</name>
+        <type>Date</type>
+        <format>yyyy-MM-dd</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>2013-01-06</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>end_date</name>
+        <type>Date</type>
+        <format>yyyy-MM-dd</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>2013-03-10</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+    <limit>1</limit>
+    <never_ending>N</never_ending>
+    <interval_in_ms>5000</interval_in_ms>
+    <row_time_field>now</row_time_field>
+    <last_time_field>FiveSecondsAgo</last_time_field>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
@@ -772,14 +823,14 @@ CREATE TABLE dwh.dim_calendar
       </output>
     </remotesteps>
     <GUI>
-      <xloc>112</xloc>
-      <yloc>304</yloc>
+      <xloc>64</xloc>
+      <yloc>400</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Create dwh.dim_customer</name>
-    <type>ExecSQL</type>
+    <name>Calculator 3</name>
+    <type>Calculator</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -788,30 +839,22 @@ CREATE TABLE dwh.dim_calendar
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>datalearn_db</connection>
-    <execute_each_row>N</execute_each_row>
-    <single_statement>N</single_statement>
-    <replace_variables>N</replace_variables>
-    <quoteString>N</quoteString>
-    <sql>-- Drop
-DROP table if exists dwh.dim_customer cascade;
-
--- Create the table
-CREATE TABLE dwh.dim_customer
-(
- customer_key  serial NOT NULL,
- customer_id   varchar(8) NOT NULL,
- customer_name varchar(22) NOT NULL,
- segment_name      varchar(11) NOT NULL,
- CONSTRAINT PK_dim_customer PRIMARY KEY ( customer_key )
-);</sql>
-    <set_params>N</set_params>
-    <insert_field/>
-    <update_field/>
-    <delete_field/>
-    <read_field/>
-    <arguments>
-    </arguments>
+    <failIfNoFile>Y</failIfNoFile>
+    <calculation>
+      <field_name>diff_dates</field_name>
+      <calc_type>DATE_DIFF</calc_type>
+      <field_a>end_date</field_a>
+      <field_b>start_date</field_b>
+      <field_c/>
+      <value_type>Integer</value_type>
+      <value_length>-1</value_length>
+      <value_precision>-1</value_precision>
+      <remove>N</remove>
+      <conversion_mask/>
+      <decimal_symbol/>
+      <grouping_symbol/>
+      <currency_symbol/>
+    </calculation>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
@@ -821,14 +864,14 @@ CREATE TABLE dwh.dim_customer
       </output>
     </remotesteps>
     <GUI>
-      <xloc>272</xloc>
-      <yloc>304</yloc>
+      <xloc>192</xloc>
+      <yloc>400</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Create dwh.dim_geo</name>
-    <type>ExecSQL</type>
+    <name>Clone row 2</name>
+    <type>CloneRow</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -837,32 +880,13 @@ CREATE TABLE dwh.dim_customer
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>datalearn_db</connection>
-    <execute_each_row>N</execute_each_row>
-    <single_statement>N</single_statement>
-    <replace_variables>N</replace_variables>
-    <quoteString>N</quoteString>
-    <sql>-- Drop
-DROP table if exists dwh.dim_geo cascade;
-
--- Create the table
-CREATE TABLE dwh.dim_geo
-(
- geo_key     serial NOT NULL,
- country     varchar(13) NOT NULL,
- city        varchar(50) NOT NULL,
- "state"       varchar(20) NOT NULL,
- postal_code varchar(20) NOT NULL,
- region      varchar(50) NOT NULL,
- CONSTRAINT PK_dim_geo PRIMARY KEY ( geo_key )
-);</sql>
-    <set_params>N</set_params>
-    <insert_field/>
-    <update_field/>
-    <delete_field/>
-    <read_field/>
-    <arguments>
-    </arguments>
+    <nrclones>0</nrclones>
+    <addcloneflag>N</addcloneflag>
+    <cloneflagfield/>
+    <nrcloneinfield>Y</nrcloneinfield>
+    <nrclonefield>diff_dates</nrclonefield>
+    <addclonenum>Y</addclonenum>
+    <clonenumfield>delta</clonenumfield>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
@@ -872,14 +896,70 @@ CREATE TABLE dwh.dim_geo
       </output>
     </remotesteps>
     <GUI>
-      <xloc>976</xloc>
-      <yloc>304</yloc>
+      <xloc>320</xloc>
+      <yloc>400</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Create dwh.dim_product</name>
-    <type>ExecSQL</type>
+    <name>Calculator 2 2</name>
+    <type>Calculator</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <failIfNoFile>Y</failIfNoFile>
+    <calculation>
+      <field_name>a_single_date</field_name>
+      <calc_type>ADD_DAYS</calc_type>
+      <field_a>start_date</field_a>
+      <field_b>delta</field_b>
+      <field_c/>
+      <value_type>Date</value_type>
+      <value_length>-1</value_length>
+      <value_precision>-1</value_precision>
+      <remove>N</remove>
+      <conversion_mask/>
+      <decimal_symbol/>
+      <grouping_symbol/>
+      <currency_symbol/>
+    </calculation>
+    <calculation>
+      <field_name>week</field_name>
+      <calc_type>DAY_OF_WEEK</calc_type>
+      <field_a>a_single_date</field_a>
+      <field_b/>
+      <field_c/>
+      <value_type>Integer</value_type>
+      <value_length>-1</value_length>
+      <value_precision>-1</value_precision>
+      <remove>N</remove>
+      <conversion_mask/>
+      <decimal_symbol/>
+      <grouping_symbol/>
+      <currency_symbol/>
+    </calculation>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>432</xloc>
+      <yloc>400</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Filter rows</name>
+    <type>FilterRows</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -888,31 +968,25 @@ CREATE TABLE dwh.dim_geo
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>datalearn_db</connection>
-    <execute_each_row>N</execute_each_row>
-    <single_statement>N</single_statement>
-    <replace_variables>N</replace_variables>
-    <quoteString>N</quoteString>
-    <sql>-- Drop
-DROP table if exists dwh.dim_product cascade;
-
--- Create the table
-CREATE TABLE dwh.dim_product
-(
- product_key       serial NOT NULL,
- product_id        varchar(50) NOT NULL,
- product_name      varchar(150) NOT NULL,
- category_name     varchar(15) NOT NULL,
- subcategory_name varchar(11) NOT NULL,
- CONSTRAINT PK_dim_product PRIMARY KEY ( product_key )
-);</sql>
-    <set_params>N</set_params>
-    <insert_field/>
-    <update_field/>
-    <delete_field/>
-    <read_field/>
-    <arguments>
-    </arguments>
+    <send_true_to>Select values 3</send_true_to>
+    <send_false_to/>
+    <compare>
+      <condition>
+        <negated>N</negated>
+        <leftvalue>week</leftvalue>
+        <function>=</function>
+        <rightvalue/>
+        <value>
+          <name>constant</name>
+          <type>Integer</type>
+          <text>1</text>
+          <length>-1</length>
+          <precision>0</precision>
+          <isnull>N</isnull>
+          <mask>####0;-####0</mask>
+        </value>
+      </condition>
+    </compare>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
@@ -922,14 +996,14 @@ CREATE TABLE dwh.dim_product
       </output>
     </remotesteps>
     <GUI>
-      <xloc>800</xloc>
-      <yloc>304</yloc>
+      <xloc>528</xloc>
+      <yloc>400</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Create dwh.tfct_sales</name>
-    <type>ExecSQL</type>
+    <name>Select values 3</name>
+    <type>SelectValues</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -938,42 +1012,30 @@ CREATE TABLE dwh.dim_product
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>datalearn_db</connection>
-    <execute_each_row>N</execute_each_row>
-    <single_statement>N</single_statement>
-    <replace_variables>N</replace_variables>
-    <quoteString>N</quoteString>
-    <sql>-- Drop
-DROP table if exists dwh.tfct_sales;
-
--- Create the table
-CREATE TABLE dwh.tfct_sales
-(
- sales_key         serial NOT NULL,
- order_id          varchar(14) NOT NULL,
- order_date_key    integer NOT NULL,
- shipment_date_key integer NOT NULL,
- customer_key      integer NOT NULL,
- product_key       integer NOT NULL,
- shipping_key      integer NOT NULL,
- geo_key           integer NOT NULL,
- sales             numeric(28,4) NOT NULL,
- quantity          integer NOT NULL,
- discount          numeric(4,2) NOT NULL,
- profit            numeric(28,4) NOT NULL,
- CONSTRAINT PK_order PRIMARY KEY ( sales_key )
- --,CONSTRAINT FK_28 FOREIGN KEY ( customer_key ) REFERENCES dwh.dim_customer ( customer_key )
- --,CONSTRAINT FK_31 FOREIGN KEY ( product_key ) REFERENCES dwh.dim_product ( product_key )
- --,CONSTRAINT FK_60 FOREIGN KEY ( shipping_key ) REFERENCES dwh.tfct_sales ( shipping_key )
- --,CONSTRAINT FK_68 FOREIGN KEY ( geo_key ) REFERENCES dwh.dim_geo ( geo_key )
-);</sql>
-    <set_params>N</set_params>
-    <insert_field/>
-    <update_field/>
-    <delete_field/>
-    <read_field/>
-    <arguments>
-    </arguments>
+    <fields>
+      <field>
+        <name>a_single_date</name>
+        <rename/>
+      </field>
+      <select_unspecified>N</select_unspecified>
+      <meta>
+        <name>a_single_date</name>
+        <rename>a_single_date</rename>
+        <type>String</type>
+        <length>-2</length>
+        <precision>-2</precision>
+        <conversion_mask>MMMM dd, yyyy</conversion_mask>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
+    </fields>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
@@ -983,14 +1045,14 @@ CREATE TABLE dwh.tfct_sales
       </output>
     </remotesteps>
     <GUI>
-      <xloc>624</xloc>
-      <yloc>304</yloc>
+      <xloc>656</xloc>
+      <yloc>400</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Create dwh.dim_shipping</name>
-    <type>ExecSQL</type>
+    <name>User defined Java expression</name>
+    <type>Janino</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -999,29 +1061,14 @@ CREATE TABLE dwh.tfct_sales
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>datalearn_db</connection>
-    <execute_each_row>N</execute_each_row>
-    <single_statement>N</single_statement>
-    <replace_variables>N</replace_variables>
-    <quoteString>N</quoteString>
-    <sql>-- Drop
-DROP table if exists dwh.dim_shipping cascade;
-
--- Create the table
-CREATE TABLE dwh.dim_shipping
-(
- shipping_key  serial NOT NULL,
- shipping_mode varchar(14) NOT NULL,
- CONSTRAINT PK_dim_shipping PRIMARY KEY ( shipping_key )
-);
-</sql>
-    <set_params>N</set_params>
-    <insert_field/>
-    <update_field/>
-    <delete_field/>
-    <read_field/>
-    <arguments>
-    </arguments>
+    <formula>
+      <field_name>message</field_name>
+      <formula_string>"Today is " + a_single_date</formula_string>
+      <value_type>String</value_type>
+      <value_length>-1</value_length>
+      <value_precision>-1</value_precision>
+      <replace_field/>
+    </formula>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
@@ -1031,8 +1078,8 @@ CREATE TABLE dwh.dim_shipping
       </output>
     </remotesteps>
     <GUI>
-      <xloc>448</xloc>
-      <yloc>304</yloc>
+      <xloc>768</xloc>
+      <yloc>400</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
