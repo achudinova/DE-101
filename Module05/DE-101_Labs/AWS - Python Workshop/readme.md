@@ -229,15 +229,15 @@ kiwi
 <class 'str'>
 ```
 
-#5. Python Packages
-#6. Functions
-#7. Arguments and Parameters
-#8. Inputs
-#9. Loops
-#10. If Statements
-#11. Logging
-#12. Errors and Exceptions
-#13. Persisting Data
-#14. Building in AWS
-#15. Clean Up
-#16. Congratulations
+# 5. Python Packages
+# 6. Functions
+# 7. Arguments and Parameters
+# 8. Inputs
+# 9. Loops
+# 10. If Statements
+# 11. Logging
+# 12. Errors and Exceptions
+# 13. Persisting Data
+# 14. Building in AWS
+# 15. Clean Up
+# 16. Congratulations
