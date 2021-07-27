@@ -20,7 +20,7 @@ Link to the exercises - *[Learn Python On AWS Workshop](https://learn-to-code.wo
 * [x] [9. Loops]()
 * [x] [10. If Statements]()
 * [x] [11. Logging](#11.-Logging)
-* [ ] [12. Errors and Exceptions]()
+* [x] [12. Errors and Exceptions]()
 * [ ] [13. Persisting Data]()
 * [ ] [14. Building in AWS]()
 * [ ] [16. Clean Up]()
