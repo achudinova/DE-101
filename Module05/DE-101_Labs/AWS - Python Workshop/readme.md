@@ -17,9 +17,9 @@ Link to the exercises - *[Learn Python On AWS Workshop](https://learn-to-code.wo
 * [x] [6. Functions](#6.-Functions)
 * [x] [7. Arguments and Parameters]()
 * [x] [8. Inputs]()
-* [ ] [9. Loops]()
-* [ ] [10. If Statements]()
-* [ ] [11. Logging]()
+* [x] [9. Loops]()
+* [x] [10. If Statements]()
+* [x] [11. Logging](#11.-Logging)
 * [ ] [12. Errors and Exceptions]()
 * [ ] [13. Persisting Data]()
 * [ ] [14. Building in AWS]()
@@ -269,6 +269,15 @@ In this section we will start with a simple function and then write a function w
 # 9. Loops
 # 10. If Statements
 # 11. Logging
+[logging](https://docs.python.org/3/library/logging.html)
+
+Level     | When it’s used
+----------|----------
+DEBUG     |Detailed information, typically of interest only when diagnosing problems.
+INFO	  |Confirmation that things are working as expected.
+WARNING   |An indication that something unexpected happened, or indicative of some problem in the near future (e.g. ‘disk space low’). The software is still working as expected.
+ERROR     |Due to a more serious problem, the software has not been able to perform some function.
+CRITICAL  |A serious error, indicating that the program itself may be unable to continue running.
 # 12. Errors and Exceptions
 # 13. Persisting Data
 # 14. Building in AWS
