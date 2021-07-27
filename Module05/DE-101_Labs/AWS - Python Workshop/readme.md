@@ -21,10 +21,10 @@ Link to the exercises - *[Learn Python On AWS Workshop](https://learn-to-code.wo
 * [x] [10. If Statements]()
 * [x] [11. Logging](#11.-Logging)
 * [x] [12. Errors and Exceptions]()
-* [ ] [13. Persisting Data]()
-* [ ] [14. Building in AWS]()
-* [ ] [16. Clean Up]()
-* [ ] [17. Congratulations]()
+* [x] [13. Persisting Data]()
+* [x] [14. Building in AWS]()
+* [x] [16. Clean Up]()
+* [x] [17. Congratulations]()
 
 # 1. Setup
 
@@ -280,6 +280,15 @@ ERROR     |Due to a more serious problem, the software has not been able to perf
 CRITICAL  |A serious error, indicating that the program itself may be unable to continue running.
 # 12. Errors and Exceptions
 # 13. Persisting Data
+[Amazon DynamoDB](https://aws.amazon.com/dynamodb/) is a key-value and document database that delivers single-digit millisecond performance at any scale. It’s a fully managed, multiregion, multimaster, durable database with built-in security, backup and restore, and in-memory caching for internet-scale applications. DynamoDB can handle more than 10 trillion requests per day and can support peaks of more than 20 million requests per second.
+
+This lab is taken from the [Python and DynamoDB tutorial. You can follow it here or use this tutorial](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GettingStarted.Python.html) for future reference.
+
+* [DynamoDB tutorial](https://boto3.amazonaws.com/v1/documentation/api/latest/guide/dynamodb.html)
+* [DynamoDB low-level client](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/dynamodb.html)
 # 14. Building in AWS
+[AWS Lambda tutorial](https://aws.amazon.com/getting-started/hands-on/build-modern-app-fargate-lambda-dynamodb-python/)
+
+[CDK workshop](https://cdkworkshop.com/)
 # 15. Clean Up
 # 16. Congratulations
